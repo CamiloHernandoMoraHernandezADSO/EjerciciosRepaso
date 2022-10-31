@@ -1,28 +1,31 @@
 addEventListener("DOMContentLoaded", (e)=>{
-
-    let horas = document.querySelector("#horas")
-    let listHoras = []
-    let formulario = document.querySelector("#formHoras")
-    let resultados = document.querySelector("#resultados")
-    let cont = 0
-    formulario.addEventListener("submit", (e) =>{
-        e.preventDefault();
+    let n1 = document.querySelector("#n1")
+    let resultado = ""
+    let formNum = document.querySelector("#formNumeros")
+    let suma = 0
+    let result = document.querySelector("#resultados")
+    formNum.addEventListener("submit", (e)=>{
+        e.preventDefault()
         let datosEntrada = Object.fromEntries(new FormData(e.target));
-        listHoras.push(datosEntrada.horas)
-        cont += 1
-        resultados.insertAdjacentHTML("beforeend",`
-            <tr>
-                
-                <td>${cont}</td>
-                <td>${datosEntrada.horas}</td>
-                <td>${datosEntrada.horas*5208.33}</td>
-                
-                
-            </tr>
-        `)
-        horas.value = ""
 
+        for (let i = 1; i < datosEntrada.n1; i++) {
+           if(datosEntrada.n1 % i == 0){
+            suma += i
+           }
+            
+        }
+        if(datosEntrada.n1 == suma){
+            resultado = "Es perfecto"
+            suma = 0
+        }
+        else{
+            resultado = "NO es perfecto"
+            suma = 0
+        }
 
-
+        result.innerHTML = ""
+        result.insertAdjacentHTML("beforeend",`
+                <h2> ${datosEntrada.n1 + ' ' + resultado}  </h2>
+                `);
     })
 })
